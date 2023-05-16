@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row position-relative align-items-center justify-content-center m-5">
+    <div class="border rounded box">
+      <div class="text-center">
+        <img src="image1.png" class="" style="width: 200px" alt="">
+      </div>
+      <form action="/">
+        <div class="mb-3 inputBox">
+          <input name="url" type="url" class="form-control" placeholder="https://youtu.be/abcdefg" id="url" required>
+        </div>
+        <div class="mb-3 inputBox">
+          <input name="filter" type="text" class="form-control" placeholder="Filter (Optional)" id="filter">
+        </div>
+        <div class="mb-3 inputBox">
+          <input name="quality" type="text" class="form-control" placeholder="Quality (Optional)" id="quality">
+        </div>
+        <div class="mb-3 inputBox">
+          <input name="contenttype" type="text" class="form-control" placeholder="Content-Type (Ex: video/mp4)" id="contenttype">
+        </div>
+        <div class="text-center pt-2">
+          <button type="submit" class="btn btn-outline-danger">
+            <i class="bi bi-download"></i>
+            <span>Descargar</span>
+          </button>
+        </div>
+      </form>
+      <div class="position-absolute bottom-0 start-1">
+        <p>© IanVanh - 2023</p>
+      </div>
+    </div>
+    <div class="position-absolute border rounded box-3"></div>
+    <div class="position-absolute border rounded box-2"></div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row justify-content-center text-center">
+    <div class="card border mb-3 inputBox me-1 shad" style="max-width: 11rem;">
+      <div class="card-header">Qualities Available</div>
+      <div class="card-body text-danger">
+        <p class="card-text">highestaudio</p>
+        <p class="card-text">highestvideo</p>
+      </div>
+    </div>
+    <div class="card border mb-3 inputBox me-1 shad-2" style="max-width: 11rem;">
+      <div class="card-header">Filters Available</div>
+      <div class="card-body text-danger">
+        <p class="card-text">audioonly</p>
+        <p class="card-text">audioandvideo</p>
+      </div>
+    </div>
+    <div class="card border mb-3 inputBox shad-3" style="max-width: 11rem;">
+      <div class="card-header">Content-Type Available</div>
+      <div class="card-body text-danger">
+        <p class="card-text">audio/mpeg</p>
+        <p class="card-text">video/mp4</p>
+      </div>
+    </div>
+  </div>
+</div>

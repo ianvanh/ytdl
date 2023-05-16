@@ -58,7 +58,7 @@ app.get("/", (req, res) => {
       return res.end(error.toString());
     }
     return res.redirect(
-      `/${require("ytdl-core").getVideoID(req.query.url)}.${req.query.contenttype.split("/")[1] || "mp4"}?filter=${req.query.filter || "audioandvideo"}&quality=${req.query.quality || "highestvideo"}&contenttype=${req.query.contenttype || "video"}`
+      `/${require("ytdl-core").getVideoID(req.query.url)}.${req.query.contenttype.split("/")[1]}?filter=${req.query.filter || "audioandvideo"}&quality=${req.query.quality || "highestvideo"}&contenttype=${req.query.contenttype || "video/mp4"}`
     );
   } else {
     res.render('index', { pageTitle: 'YTDL - DarkBox' });
@@ -66,7 +66,7 @@ app.get("/", (req, res) => {
 });
 
 app.use((req, res, next) => {
-  res.status(404).sendFile(__dirname + '/public/404/index.html');
+  res.status(404).render(path.join(__dirname, 'views', '404.ejs'), {pageTitle: 'Pagina no encontrada'});
 });
 
 app.listen(port, () => {
