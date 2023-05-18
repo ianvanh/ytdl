@@ -8,6 +8,7 @@ const port = process.env.PORT || 3000
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.set("json spaces",2)
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -21,18 +22,30 @@ app.get("/*.*", async function(req, res) {
   if (req.url.includes("favicon")) return res.end();
   
   let url = req.query["url"];
-  let filter = req.query["filter"];
-  let quality = req.query["quality"];
-  let contenttype = req.query["contenttype"];
+  let type = req.query["type"];
 
   try {
+    let contenttype;
+    let filter;
+    let quality;
+
+    if (type === "audio") {
+      contenttype = "audio/mp3";
+      filter = "audioonly";
+      quality = req.query["quality"] || "highestaudio";
+    } else {
+      contenttype = req.query["contenttype"] || "video/mp4";
+      filter = req.query["filter"] || "audioandvideo";
+      quality = req.query["quality"] || "highestvideo";
+    }
+
     if (contenttype) res.setHeader("content-type", contenttype);
     let stream = await require("ytdl-core")(
       req.url
         .split("?")[0]
         .split(".")[0]
         .slice(1),
-      { quality: quality || "highestvideo", filter: filter || "audioandvideo" }
+      { quality, filter }
     ).on("error", error => {
       console.error(error);
       res.json({ url: url, error: error });
@@ -57,8 +70,24 @@ app.get("/", (req, res) => {
     } catch (error) {
       return res.end(error.toString());
     }
+
+    let type = req.query["type"];
+    let contenttype;
+    let filter;
+    let quality;
+
+    if (type === "audio") {
+      contenttype = "audio/mp3";
+      filter = "audioonly";
+      quality = req.query["quality"] || "highestaudio";
+    } else {
+      contenttype = req.query["contenttype"] || "video/mp4";
+      filter = req.query["filter"] || "audioandvideo";
+      quality = req.query["quality"] || "highestvideo";
+    }
+
     return res.redirect(
-      `/${require("ytdl-core").getVideoID(req.query.url)}.${req.query.contenttype.split("/")[1]}?filter=${req.query.filter || "audioandvideo"}&quality=${req.query.quality || "highestvideo"}&contenttype=${req.query.contenttype || "video/mp4"}`
+      `/${require("ytdl-core").getVideoID(req.query.url)}.${contenttype.split("/")[1]}?type=${type}&filter=${filter}&quality=${quality}&contenttype=${contenttype}`
     );
   } else {
     res.render('index', { pageTitle: 'YTDL - DarkBox' });
