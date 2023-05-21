@@ -48,7 +48,7 @@ app.get("/*.*", async function(req, res) {
       { quality, filter }
     ).on("error", error => {
       console.error(error);
-      res.json({ url: url, error: error });
+      res.json({ url: url, error: 'Tenemos un error '+ error });
       return;
     }).on("info", info => {
       if (!contenttype)
@@ -68,7 +68,7 @@ app.get("/", (req, res) => {
     try {
       require("ytdl-core").getVideoID(req.query.url);
     } catch (error) {
-      return res.end(error.toString());
+      return res.status(404).render(path.join(__dirname, 'views', '404.ejs'), {pageTitle: 'Error en la Url'});
     }
 
     let type = req.query["type"];
