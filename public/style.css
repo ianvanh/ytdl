@@ -21,8 +21,8 @@ body {
 .box-back {
   background: var(--eerie-black);
   border-radius: 10px;
-  width: 500px;
-  height: 500px;
+  width: 550px;
+  height: 550px;
   box-shadow: -10px -10px 20px -5px #f9fbfd,
               10px 10px 20px #a9bee8;
 }
