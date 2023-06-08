@@ -2,7 +2,6 @@ const express = require('express');
 const favicon = require('express-favicon');
 const path = require('path');
 const fs = require('fs');
-const path = require('path');
 const ejs = require('ejs');
 
 const app = express();
