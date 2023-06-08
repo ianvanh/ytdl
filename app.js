@@ -1,5 +1,6 @@
 const express = require('express');
 const favicon = require('express-favicon');
+const path = require('path');
 const fs = require('fs');
 const path = require('path');
 const ejs = require('ejs');
@@ -8,8 +9,9 @@ const app = express();
 const port = process.env.PORT || 3000
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
-app.use(favicon('https://avatars.githubusercontent.com/u/82006592?v=4'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public/logo.jpg')));
+
 app.set("json spaces",2)
 
 app.set('views', path.join(__dirname, 'views'));
