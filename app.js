@@ -8,6 +8,7 @@ const port = process.env.PORT || 3000
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(favicon('https://avatars.githubusercontent.com/u/82006592?v=4'));
 app.set("json spaces",2)
 
 app.set('views', path.join(__dirname, 'views'));
